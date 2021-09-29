@@ -1,5 +1,5 @@
-# CORD-X
+# Stock-X
 
-This repo is for a university project...
+This repo is for a university project which is based on ML
 
-//TBD
+// More details TBD
