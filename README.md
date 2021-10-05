@@ -1,5 +1,5 @@
 # Stock-X
 
-This repo is for a university project which is based on ML
+This project is all about analysis of Stock Market and providing suggestions to stockholders to invest in right company
 
-// More details TBD
+// More details TBD and will be updated soon
