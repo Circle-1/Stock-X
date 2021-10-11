@@ -27,4 +27,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: user/app:latest
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64
+          tags: aerox86/stock-x:latest
