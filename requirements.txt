@@ -376,7 +376,7 @@ netCDF4==1.5.7
 networkx @ file:///home/conda/feedstock_root/build_artifacts/networkx_1598210780226/work
 nibabel==3.2.1
 nilearn==0.8.1
-nltk==3.2.4
+nltk==3.6.4
 nnabla==1.21.0
 nnabla-ext-cuda110==1.21.0
 nose==1.3.7
@@ -428,7 +428,7 @@ PDPbox @ git+https://github.com/SauceCat/PDPbox@b022a0aabcc6dbe2440244bf48d08fbb
 pexpect @ file:///home/conda/feedstock_root/build_artifacts/pexpect_1602535608087/work
 phik @ file:///home/conda/feedstock_root/build_artifacts/phik_1615724006677/work
 pickleshare @ file:///home/conda/feedstock_root/build_artifacts/pickleshare_1602536217715/work
-Pillow==8.2.0
+Pillow==8.3.2
 plac==1.1.3
 plotly==5.3.1
 plotly-express==0.4.1
@@ -471,7 +471,6 @@ pycodestyle==2.7.0
 pycosat==0.6.3
 pycountry==20.7.3
 pycparser @ file:///tmp/build/80754af9/pycparser_1594388511720/work
-pycrypto==2.6.1
 pyct==0.4.8
 pycuda==2021.1
 pydantic @ file:///home/conda/feedstock_root/build_artifacts/pydantic_1620819958857/work
@@ -624,7 +623,7 @@ tensorboard==2.6.0
 tensorboard-data-server==0.6.1
 tensorboard-plugin-wit==1.8.0
 tensorboardX==2.2
-tensorflow==2.4.1
+tensorflow==2.5.1
 tensorflow-addons==0.12.1
 tensorflow-cloud==0.1.13
 tensorflow-datasets==3.0.0
