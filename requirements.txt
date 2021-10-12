@@ -1,104 +1,21 @@
-absl-py==0.12.0
-access==1.1.3
-affine==2.3.0
-aiobotocore==1.4.1
-aiohttp @ file:///home/conda/feedstock_root/build_artifacts/aiohttp_1623682242266/work
-aioitertools==0.8.0
-albumentations==1.0.3
-alembic==1.7.3
-allennlp==2.7.0
-altair==4.1.0
-annoy==1.17.0
-ansiwrap==0.8.4
-anyio @ file:///home/conda/feedstock_root/build_artifacts/anyio_1626998551461/work/dist
-appdirs @ file:///home/conda/feedstock_root/build_artifacts/appdirs_1603108395799/work
-argcomplete @ file:///home/conda/feedstock_root/build_artifacts/argcomplete_1619128689661/work
-argon2-cffi @ file:///home/conda/feedstock_root/build_artifacts/argon2-cffi_1610522577486/work
-arrow @ file:///home/conda/feedstock_root/build_artifacts/arrow_1624555980104/work
-arviz==0.11.2
-asn1crypto @ file:///home/conda/feedstock_root/build_artifacts/asn1crypto_1595949944546/work
-astunparse==1.6.3
-async-generator==1.10
-async-timeout==3.0.1
-attrs @ file:///home/conda/feedstock_root/build_artifacts/attrs_1620387926260/work
-audioread==2.1.9
-autobahn==21.3.1
-autocfg==0.0.8
-Automat==20.2.0
-autopage==0.4.0
-aws-requests-auth==0.4.3
 Babel==2.9.1
-backcall @ file:///home/conda/feedstock_root/build_artifacts/backcall_1592338393461/work
 backports.csv==1.0.7
-backports.functools-lru-cache @ file:///home/conda/feedstock_root/build_artifacts/backports.functools_lru_cache_1618230623929/work
 backports.zoneinfo==0.2.1
 base58==2.1.0
 bayesian-optimization==1.2.0
 bayespy==0.5.22
-beatrix-jupyterlab @ file:///tmp/beatrix_jupyterlab-0.9.1.tar.gz
 beautifulsoup4==4.10.0
 binaryornot==0.4.4
-biopython==1.79
-black @ file:///home/conda/feedstock_root/build_artifacts/black-recipe_1626468239465/work
-bleach @ file:///home/conda/feedstock_root/build_artifacts/bleach_1628022386512/work
-blinker==1.4
-blis==0.7.4
-bokeh @ file:///home/conda/feedstock_root/build_artifacts/bokeh_1625756935798/work
-Boruta==0.3
-boto3==1.18.44
-botocore==1.21.44
-Bottleneck @ file:///home/conda/feedstock_root/build_artifacts/bottleneck_1611195599064/work
--e git+https://github.com/SohierDane/BigQuery_Helper@8615a7f6c1663e7f2d48aa2b32c2dbcb600a440f#egg=bq_helper
-bqplot==0.12.30
-branca==0.4.2
-brewer2mpl==1.4.1
-brotlipy==0.7.0
-cachetools @ file:///home/conda/feedstock_root/build_artifacts/cachetools_1619593780156/work
-caip-notebooks-serverextension @ file:///opt/conda/conda-bld/dlenv-base_1629234482326/work/packages/server_extension
-Cartopy @ file:///home/conda/feedstock_root/build_artifacts/cartopy_1630680835556/work
-catalogue==1.0.0
-catalyst==21.8
-catboost==0.26.1
-category-encoders==2.2.2
-certifi==2021.5.30
-cesium==0.9.12
-cffi @ file:///tmp/build/80754af9/cffi_1625814693446/work
-cftime==1.5.0
-chardet @ file:///tmp/build/80754af9/chardet_1607706768982/work
-charset-normalizer @ file:///home/conda/feedstock_root/build_artifacts/charset-normalizer_1627689966083/work
-checklist==0.0.11
-cheroot==8.5.2
-CherryPy==18.6.1
-cleverhans==4.0.0
-click @ file:///home/conda/feedstock_root/build_artifacts/click_1621503711357/work
-click-plugins==1.1.1
-cliff==3.9.0
-cligj==0.7.2
-cloud-tpu-client==0.10
-cloudpickle @ file:///home/conda/feedstock_root/build_artifacts/cloudpickle_1598400192773/work
-cmaes==0.8.2
-cmd2==2.2.0
-cmdstanpy==0.9.5
-cmudict==1.0.2
-colorama @ file:///home/conda/feedstock_root/build_artifacts/colorama_1602866480661/work
-colorcet==2.0.6
-colorlog==6.4.1
-colorlover==0.3.0
 conda==4.10.3
-conda-package-handling @ file:///tmp/build/80754af9/conda-package-handling_1618262151086/work
-configparser==5.0.2
-confuse @ file:///home/conda/feedstock_root/build_artifacts/confuse_1625155230097/work
 constantly==15.1.0
 contextily==1.1.0
 contextlib2==21.6.0
 convertdate==2.3.2
 cookiecutter==1.7.0
 coverage==5.5
-cryptography @ file:///tmp/build/80754af9/cryptography_1616769182610/work
 cudf==21.8.3
 cufflinks==0.17.3
 cuml==21.8.2
-cupy @ file:///home/conda/feedstock_root/build_artifacts/cupy_1630031352128/work
 CVXcanon==0.1.2
 cycler==0.10.0
 cymem==2.0.5
@@ -107,37 +24,12 @@ Cython==0.29.24
 cytoolz==0.11.0
 dask==2021.9.0
 dask-cudf==21.8.3
-dataclasses @ file:///home/conda/feedstock_root/build_artifacts/dataclasses_1628958434797/work
 datasets==1.12.1
 datashader==0.13.0
 datashape==0.5.2
 datatable==1.0.0
 deap==1.3.1
-debugpy @ file:///home/conda/feedstock_root/build_artifacts/debugpy_1627074840854/work
-decorator @ file:///home/conda/feedstock_root/build_artifacts/decorator_1621187651333/work
-deepdish==0.3.6
-defusedxml @ file:///home/conda/feedstock_root/build_artifacts/defusedxml_1615232257335/work
-Delorean==1.0.0
-deprecation==2.1.0
-descartes==1.1.0
-dill==0.3.4
-dipy==1.4.1
-distributed==2021.9.0
-dlib==19.22.1
-dm-tree==0.1.6
-dnspython==2.1.0
 docker @ file:///home/conda/feedstock_root/build_artifacts/docker-py_1617755742617/work
-docker-pycreds==0.4.0
-docutils==0.17.1
-earthengine-api==0.1.283
-easydev==0.12.0
-easydict==1.9
-easyocr==1.4.1
-ecos==2.0.7.post1
-eli5==0.11.0
-emoji==1.5.0
-en-core-web-lg @ https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-2.3.1/en_core_web_lg-2.3.1.tar.gz
-en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.3.1/en_core_web_sm-2.3.1.tar.gz
 entrypoints @ file:///home/conda/feedstock_root/build_artifacts/entrypoints_1605121927639/work/dist/entrypoints-0.3-py2.py3-none-any.whl
 ephem==4.0.0.2
 esda==2.4.1
