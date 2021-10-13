@@ -1,0 +1,6 @@
+[submodule "Stock-X-frontend"]
+	path = Stock-X-frontend
+	url = https://github.com/Circle-1/Stock-X-frontend.git
+[submodule "Stock-X-backend"]
+	path = Stock-X-backend
+	url = https://github.com/Circle-1/Stock-X-backend.git
