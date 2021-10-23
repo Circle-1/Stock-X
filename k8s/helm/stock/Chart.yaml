@@ -1,6 +1,7 @@
 apiVersion: v2
-name: stock
-description: A Helm chart for Kubernetes
+name: stock-x
+description: An app to analyse Stock Market data and provide predictions
+icon: https://avatars.githubusercontent.com/u/90402289?s=400&u=f93d1815a9bf2d1a465dba1ea9d68364aac2b5b3&v=4
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -15,10 +16,16 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.1.0
+version: 0.0.1
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
-appVersion: "1.16.0"
+appVersion: "v0.0.3"
+
+deprecated: false
+
+maintainers:
+    - name: Aadhitya A
+      email: aadhitya864@gmail.com
