@@ -8,6 +8,8 @@ Here's the ref link to [Kaggle](https://www.kaggle.com/)
 
 Notebook link: [Click here](https://www.kaggle.com/aadhityaa/stock-cnn-lstm)
 
+Docker Image link: [Click here](https://hub.docker.com/r/aerox86/stock-x)
+
 ## Libraries used:
     - Tensorflow
     - Keras
