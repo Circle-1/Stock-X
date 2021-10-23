@@ -9,6 +9,7 @@ restartPolicy: Always
 image:
   name: aerox86/stock-x
   pullPolicy: Always
+  tag: latest
 
 imagePullSecrets: []
 nameOverride: "stock-x"
