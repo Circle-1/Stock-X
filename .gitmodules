@@ -4,3 +4,6 @@
 [submodule "Stock-X-backend"]
 	path = Stock-X-backend
 	url = https://github.com/Circle-1/Stock-X-backend.git
+[submodule "helm-charts"]
+	path = helm-charts
+	url = https://github.com/Circle-1/helm-charts

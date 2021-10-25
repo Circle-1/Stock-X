@@ -7,12 +7,9 @@ restartPolicy: Always
 
 image:
   name: aerox86/stock-x
-  tag: 'latest-stable'
   pullPolicy: Always
 
 imagePullSecrets: []
-nameOverride: "stock-x"
-fullnameOverride: "stock-x"
 
 serviceAccount:
   # Specifies whether a service account should be created
