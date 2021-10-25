@@ -1,11 +1,8 @@
 name: Docker Image CI
 
 on:
-  push:
-    tags: 
-      - 'v*.*.*'
-    branches:
-      - "main"
+  release:
+    type: [created]
 
 jobs:
   docker:
@@ -24,13 +21,8 @@ jobs:
         with:
           images: aerox86/stock-x
           tags: |
-            type=schedule
             type=ref,event=branch
-            type=ref,event=pr
             type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
-            type=sha
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
