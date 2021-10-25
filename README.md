@@ -10,6 +10,8 @@ Notebook link: [Click here](https://www.kaggle.com/aadhityaa/stock-cnn-lstm)
 
 Docker Image link: [Click here](https://hub.docker.com/r/aerox86/stock-x)
 
+Helm charts: [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/stock-x)](https://artifacthub.io/packages/search?repo=stock-x)
+
 ## Libraries used:
     - Tensorflow
     - Keras
