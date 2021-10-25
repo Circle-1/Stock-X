@@ -9,7 +9,7 @@ restartPolicy: Always
 image:
   name: aerox86/stock-x
   pullPolicy: Always
-  tag: latest
+  tag: latest-stable
 
 imagePullSecrets: []
 nameOverride: "stock-x"
@@ -39,7 +39,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8888
+  port: 80
 
 ingress:
   enabled: false
