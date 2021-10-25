@@ -5,11 +5,10 @@
 replicaCount: 1
 restartPolicy: Always
 
-
 image:
   name: aerox86/stock-x
+  tag: 'latest-stable'
   pullPolicy: Always
-  tag: latest-stable
 
 imagePullSecrets: []
 nameOverride: "stock-x"
@@ -38,8 +37,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: ClusterIP
-  port: 80
+  type: LoadBalancer
+  port: 8080
 
 ingress:
   enabled: false
@@ -73,7 +72,7 @@ autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 100
-  targetCPUUtilizationPercentage: 60
+  targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
