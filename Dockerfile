@@ -1,8 +1,10 @@
 FROM alpine:latest
 RUN apk update
-RUN apk add --update --no-cache blas blas-dev build-base ca-certificates clang clang-dev cmake linux-headers openexr openexr-dev pkgconf wget
+RUN apk add --update --no-cache build-base ca-certificates clang clang-dev cmake linux-headers pkgconf wget
 RUN apk add --update --no-cache python3 py3-pip && ln -sf python3 /usr/bin/python
 RUN pip3 -q install pip --upgrade
+RUN pip3 install --no-cache-dir setuptools
+RUN pip3 install --no-cache-dir numpy pandas matplotlib seaborn
 RUN mkdir src
 WORKDIR /src/
 COPY . .
