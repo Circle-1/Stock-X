@@ -1,6 +1,6 @@
-FROM ubuntu:latest
-RUN apt-get update && apt-get -y update
-RUN apt-get install -y build-essential python3.6 python3-pip python3-dev
+FROM alpine:latest
+RUN apk update
+RUN apk add --update --no-cache python3 py3-pip && ln -sf python3 /usr/bin/python3
 RUN pip3 -q install pip --upgrade
 RUN mkdir src
 WORKDIR /src/
