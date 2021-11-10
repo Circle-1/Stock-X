@@ -515,7 +515,7 @@ tensorboard==2.6.0
 tensorboard-data-server==0.6.1
 tensorboard-plugin-wit==1.8.0
 tensorboardX==2.2
-tensorflow==2.5.1
+tensorflow==2.5.2
 tensorflow-addons==0.12.1
 tensorflow-cloud==0.1.13
 tensorflow-datasets==3.0.0
