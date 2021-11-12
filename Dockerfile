@@ -3,7 +3,13 @@ RUN apt-get update
 RUN apt install -y python3 python3-pip
 RUN pip3 install --no-cache-dir setuptools
 RUN pip3 install --no-cache-dir numpy pandas matplotlib seaborn
-RUN pip3 install conda
+ENV PATH="/root/miniconda3/bin:${PATH}"
+ARG PATH="/root/miniconda3/bin:${PATH}"
+RUN wget \
+    https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+    && mkdir /root/.conda \
+    && bash Miniconda3-latest-Linux-x86_64.sh -b \
+    && rm -f Miniconda3-latest-Linux-x86_64.sh 
 RUN conda install -c conda-forge tensorflow
 RUN mkdir src
 WORKDIR /src/
