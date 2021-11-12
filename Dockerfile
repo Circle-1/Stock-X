@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 RUN apt-get update
-RUN apt install -y python3 python3-pip
+RUN apt install -y python3 python3-pip wget
 RUN pip3 install --no-cache-dir setuptools
 RUN pip3 install --no-cache-dir numpy pandas matplotlib seaborn
 ENV PATH="/root/miniconda3/bin:${PATH}"
