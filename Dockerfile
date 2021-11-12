@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 RUN apt-get update
-RUN apt install python3 python3-pip
+RUN apt install -y python3 python3-pip
 RUN pip3 install --no-cache-dir setuptools
 RUN pip3 install --no-cache-dir numpy pandas matplotlib seaborn
 RUN pip3 install conda
