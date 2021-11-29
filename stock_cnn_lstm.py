@@ -2,7 +2,7 @@
 # # Stock Market Analysis using CNN-LSTM model
 # This project is about analysis of Stock Market and providing suggestions and predictions to the stockholders. For this, we used CNN-LSTM approach to create a blank model, then use it to train on stock market data. Further implementation is discussed below...
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:34:28.116467Z","iopub.execute_input":"2021-11-28T06:34:28.116849Z","iopub.status.idle":"2021-11-28T06:34:28.122578Z","shell.execute_reply.started":"2021-11-28T06:34:28.116757Z","shell.execute_reply":"2021-11-28T06:34:28.121521Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:47:50.820187Z","iopub.execute_input":"2021-11-29T11:47:50.820801Z","iopub.status.idle":"2021-11-29T11:47:50.825269Z","shell.execute_reply.started":"2021-11-29T11:47:50.820743Z","shell.execute_reply":"2021-11-29T11:47:50.824484Z"}}
 # This Python 3 environment comes with many helpful analytics libraries installed
 # It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python
 # For example, here's several helpful packages to load
@@ -24,7 +24,7 @@ import os
 # %% [markdown]
 # ## Data Preprocessing and Analysis
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:34:28.124670Z","iopub.execute_input":"2021-11-28T06:34:28.125326Z","iopub.status.idle":"2021-11-28T06:34:28.142670Z","shell.execute_reply.started":"2021-11-28T06:34:28.125281Z","shell.execute_reply":"2021-11-28T06:34:28.141520Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:47:50.835758Z","iopub.execute_input":"2021-11-29T11:47:50.835970Z","iopub.status.idle":"2021-11-29T11:47:50.848974Z","shell.execute_reply.started":"2021-11-29T11:47:50.835948Z","shell.execute_reply":"2021-11-29T11:47:50.848218Z"}}
 import math
 import seaborn as sns
 import datetime as dt
@@ -38,7 +38,7 @@ plt.style.use("ggplot")
 # %% [markdown]
 # First we'd read the CSV file and then drop the null columns. Then we'd check the columns (some not all)
 
-# %% [code] {"_kg_hide-input":true,"execution":{"iopub.status.busy":"2021-11-28T06:34:28.146347Z","iopub.execute_input":"2021-11-28T06:34:28.146984Z","iopub.status.idle":"2021-11-28T06:34:28.159466Z","shell.execute_reply.started":"2021-11-28T06:34:28.146935Z","shell.execute_reply":"2021-11-28T06:34:28.158426Z"}}
+# %% [code] {"_kg_hide-input":true,"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:47:50.852563Z","iopub.execute_input":"2021-11-29T11:47:50.852877Z","iopub.status.idle":"2021-11-29T11:47:50.860831Z","shell.execute_reply.started":"2021-11-29T11:47:50.852851Z","shell.execute_reply":"2021-11-29T11:47:50.859967Z"}}
 #1DP18XAREYFRWP4I
 import requests
 import csv
@@ -63,12 +63,12 @@ def request_stock_price_list(symbol, size, token):
     df['date'] = date
     return df
 
-# %% [code] {"execution":{"iopub.status.busy":"2021-11-28T06:34:28.161973Z","iopub.execute_input":"2021-11-28T06:34:28.162506Z","iopub.status.idle":"2021-11-28T06:36:32.863536Z","shell.execute_reply.started":"2021-11-28T06:34:28.162459Z","shell.execute_reply":"2021-11-28T06:36:32.862428Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:47:50.865172Z","iopub.execute_input":"2021-11-29T11:47:50.865830Z","iopub.status.idle":"2021-11-29T11:49:35.584715Z","shell.execute_reply.started":"2021-11-29T11:47:50.865795Z","shell.execute_reply":"2021-11-29T11:49:35.583887Z"}}
 cv1 = request_stock_price_list('IBM', 'full', key)
 print(cv1.head)
 cv1.to_csv('data.csv')
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:36:32.865362Z","iopub.execute_input":"2021-11-28T06:36:32.866215Z","iopub.status.idle":"2021-11-28T06:36:32.903318Z","shell.execute_reply.started":"2021-11-28T06:36:32.866169Z","shell.execute_reply":"2021-11-28T06:36:32.902157Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:35.586527Z","iopub.execute_input":"2021-11-29T11:49:35.586830Z","iopub.status.idle":"2021-11-29T11:49:35.613479Z","shell.execute_reply.started":"2021-11-29T11:49:35.586795Z","shell.execute_reply":"2021-11-29T11:49:35.612687Z"}}
 # For data preprocessing and analysis part
 data = pd.read_csv('../input/price-volume-data-for-all-us-stocks-etfs/Stocks/abe.us.txt')
 #data = pd.read_csv('../input/nifty50-stock-market-data/COALINDIA.csv')
@@ -78,24 +78,78 @@ data = pd.read_csv('../input/price-volume-data-for-all-us-stocks-etfs/Stocks/abe
 data.dropna(inplace=True)
 data.head()
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:36:32.904932Z","iopub.execute_input":"2021-11-28T06:36:32.905350Z","iopub.status.idle":"2021-11-28T06:36:32.927988Z","shell.execute_reply.started":"2021-11-28T06:36:32.905306Z","shell.execute_reply":"2021-11-28T06:36:32.926993Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:35.614531Z","iopub.execute_input":"2021-11-29T11:49:35.615131Z","iopub.status.idle":"2021-11-29T11:49:35.630304Z","shell.execute_reply.started":"2021-11-29T11:49:35.615094Z","shell.execute_reply":"2021-11-29T11:49:35.629643Z"}}
 data.info()
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:36:32.931328Z","iopub.execute_input":"2021-11-28T06:36:32.932006Z","iopub.status.idle":"2021-11-28T06:36:32.970247Z","shell.execute_reply.started":"2021-11-28T06:36:32.931963Z","shell.execute_reply":"2021-11-28T06:36:32.968967Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:35.632354Z","iopub.execute_input":"2021-11-29T11:49:35.633032Z","iopub.status.idle":"2021-11-29T11:49:35.660603Z","shell.execute_reply.started":"2021-11-29T11:49:35.632997Z","shell.execute_reply":"2021-11-29T11:49:35.659673Z"}}
 data.describe()
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:36:32.972045Z","iopub.execute_input":"2021-11-28T06:36:32.972715Z","iopub.status.idle":"2021-11-28T06:36:32.986005Z","shell.execute_reply.started":"2021-11-28T06:36:32.972669Z","shell.execute_reply":"2021-11-28T06:36:32.984696Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:35.661816Z","iopub.execute_input":"2021-11-29T11:49:35.662061Z","iopub.status.idle":"2021-11-29T11:49:35.671552Z","shell.execute_reply.started":"2021-11-29T11:49:35.662029Z","shell.execute_reply":"2021-11-29T11:49:35.670543Z"}}
 data.isnull().sum()
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:36:32.987767Z","iopub.execute_input":"2021-11-28T06:36:32.988431Z","iopub.status.idle":"2021-11-28T06:36:33.016457Z","shell.execute_reply.started":"2021-11-28T06:36:32.988388Z","shell.execute_reply":"2021-11-28T06:36:33.015453Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:35.673276Z","iopub.execute_input":"2021-11-29T11:49:35.673525Z","iopub.status.idle":"2021-11-29T11:49:35.693157Z","shell.execute_reply.started":"2021-11-29T11:49:35.673493Z","shell.execute_reply":"2021-11-29T11:49:35.692377Z"}}
 data.reset_index(drop=True, inplace=True)
 data.fillna(data.mean(), inplace=True)
 data.head()
 
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:35.694376Z","iopub.execute_input":"2021-11-29T11:49:35.694685Z","iopub.status.idle":"2021-11-29T11:49:38.978148Z","shell.execute_reply.started":"2021-11-29T11:49:35.694650Z","shell.execute_reply":"2021-11-29T11:49:38.977468Z"}}
+data.plot(legend=True,subplots=True, figsize = (12, 6))
+plt.show()
+#data['Close'].plot(legend=True, figsize = (12, 6))
+#plt.show()
+#data['Volume'].plot(legend=True,figsize=(12,7))
+#plt.show()
+
+data.shape
+data.size
+data.describe(include='all').T
+data.dtypes
+data.nunique()
+ma_day = [10,50,100]
+
+for ma in ma_day:
+    column_name = "MA for %s days" %(str(ma))
+    data[column_name]=pd.DataFrame.rolling(data['Close'],ma).mean()
+
+data['Daily Return'] = data['Close'].pct_change()
+# plot the daily return percentage
+data['Daily Return'].plot(figsize=(12,5),legend=True,linestyle=':',marker='o')
+plt.show()
+
+sns.displot(data['Daily Return'].dropna(),bins=100,color='green')
+plt.show()
+
+date=pd.DataFrame(data['Date'])
+closing_df1 = pd.DataFrame(data['Close'])
+close1  = closing_df1.rename(columns={"Close": "data_close"})
+close2=pd.concat([date,close1],axis=1)
+close2.head()
+
+data.reset_index(drop=True, inplace=True)
+data.fillna(data.mean(), inplace=True)
+data.head()
+
+data.nunique()
+
+data.sort_index(axis=1,ascending=True)
+
+cols_plot = ['Open', 'High', 'Low','Close','Volume','MA for 10 days','MA for 50 days','MA for 100 days','Daily Return']
+axes = data[cols_plot].plot(marker='.', alpha=0.7, linestyle='None', figsize=(11, 9), subplots=True)
+for ax in axes:
+    ax.set_ylabel('Daily trade')
+
+plt.plot(data['Close'], label="Close price")
+plt.xlabel("Timestamp")
+plt.ylabel("Closing price")
+df = data
+print(df)
+
+data.isnull().sum()
+
 # %% [markdown]
 # After that, we'll visualize the data for understanding, this is shown below...
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:36:33.017981Z","iopub.execute_input":"2021-11-28T06:36:33.018993Z","iopub.status.idle":"2021-11-28T06:36:33.985477Z","shell.execute_reply.started":"2021-11-28T06:36:33.018950Z","shell.execute_reply":"2021-11-28T06:36:33.983664Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:38.979375Z","iopub.execute_input":"2021-11-29T11:49:38.979961Z","iopub.status.idle":"2021-11-29T11:49:39.668971Z","shell.execute_reply.started":"2021-11-29T11:49:38.979925Z","shell.execute_reply":"2021-11-29T11:49:39.668283Z"}}
 cols_plot = ['Open', 'High', 'Low','Close']
 axes = data[cols_plot].plot(marker='.', alpha=0.5, linestyle='None', figsize=(11, 9), subplots=True)
 for ax in axes:
@@ -104,64 +158,59 @@ for ax in axes:
 # %% [markdown]
 # Then we'd print the data after making changes and dropping null data
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:36:33.987235Z","iopub.execute_input":"2021-11-28T06:36:33.990100Z","iopub.status.idle":"2021-11-28T06:36:34.353571Z","shell.execute_reply.started":"2021-11-28T06:36:33.990054Z","shell.execute_reply":"2021-11-28T06:36:34.352516Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:39.669994Z","iopub.execute_input":"2021-11-29T11:49:39.670363Z","iopub.status.idle":"2021-11-29T11:49:39.982338Z","shell.execute_reply.started":"2021-11-29T11:49:39.670329Z","shell.execute_reply":"2021-11-29T11:49:39.981674Z"}}
 plt.plot(data['Close'], label="Close price")
 plt.xlabel("Timestamp")
 plt.ylabel("Closing price")
 df = data
 print(df)
 
-# %% [code] {"execution":{"iopub.status.busy":"2021-11-28T06:36:34.355413Z","iopub.execute_input":"2021-11-28T06:36:34.356084Z","iopub.status.idle":"2021-11-28T06:36:34.362796Z","shell.execute_reply.started":"2021-11-28T06:36:34.356035Z","shell.execute_reply":"2021-11-28T06:36:34.361460Z"}}
-# Make DataFrame of the given data
-#data = pd.DataFrame({"Date":['2005-02-25','2005-02-2','2005-03-01','2005-03-02','2005-03-01'],
-#                    "Open":[6.4987,6.6072,6.6391,6.5753,6.5753],
-#                     "High":[6.6009,6.7669,6.6773,6.6072,6.6135],
-#                     "Low":[6.4668,6.5944,6.6072,6.5434,6.5562],
-#                    "Close":[6.5753,6.6263,6.6072,6.5816,6.5944],
-#                    "Volume":[55766,49343,31643,27101,17387],
-#                    "OpenInt":[0,0,0,0,0]})
-#data['Date'] = pd.to_numeric(data['Date'], errors='coerce')
-#data['Date'] = data['Date'].astype(float)
+df.describe().transpose()
 
-#from sklearn.preprocessing import OrdinalEncoder
-#ord_enc = OrdinalEncoder()
-  
-# Transform the data
-#data[["Open","Close","OpenInt"]] = ord_enc.fit_transform(data[["Open","Close","OpenInt"]])
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:39.985253Z","iopub.execute_input":"2021-11-29T11:49:39.985471Z","iopub.status.idle":"2021-11-29T11:49:40.575017Z","shell.execute_reply.started":"2021-11-29T11:49:39.985440Z","shell.execute_reply":"2021-11-29T11:49:40.574242Z"}}
+X = data.drop(['Date', 'Close'], axis=1)
+Y = data['Close']
 
-# import VarianceThreshold
-#from sklearn.feature_selection import VarianceThreshold
-#var_threshold = VarianceThreshold(threshold=0)   # threshold = 0 for constant
-  
-# fit the data
-#var_threshold.fit(data)
-  
-# We can check the variance of different features as
-#print(var_threshold.variances_)
+X.shape,Y.shape
 
-#print(var_threshold.transform(data))
-#print('' * 10,"Separator",'' * 10)
-  
-# shapes of data before transformed and after transformed
-#print("EARLIER Shape of the DATA: ", data.shape)
-#print("Shape after transformation: ", var_threshold.transform(data).shape)
+from mlxtend.feature_selection import SequentialFeatureSelector as sfs
+from sklearn.linear_model import LinearRegression
+
+lreg = LinearRegression()
+sfs1 = sfs(lreg, k_features=2, forward=False, verbose=2, scoring='neg_mean_squared_error')
+
+sfs1 = sfs1.fit(X, Y)
+
+feat_names = list(sfs1.k_feature_names_)
+print(feat_names)
+
+# creating a new dataframe using the above variables and adding the target variable
+new_data = data[feat_names]
+new_data['Close'] = data['Close']
+
+# first five rows of the new data
+new_data.head()
+
+new_data.shape, data.shape
+
+df = new_data
 
 # %% [markdown]
 # The data has been analysed but it must be converted into data of shape [100,1] to make it easier for CNN to train on... Else it won't select necessary features and the model will fail
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:36:34.364738Z","iopub.execute_input":"2021-11-28T06:36:34.365455Z","iopub.status.idle":"2021-11-28T06:36:48.443119Z","shell.execute_reply.started":"2021-11-28T06:36:34.365410Z","shell.execute_reply":"2021-11-28T06:36:48.442126Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:40.576159Z","iopub.execute_input":"2021-11-29T11:49:40.576423Z","iopub.status.idle":"2021-11-29T11:49:49.686255Z","shell.execute_reply.started":"2021-11-29T11:49:40.576386Z","shell.execute_reply":"2021-11-29T11:49:49.685428Z"}}
 from sklearn.model_selection import train_test_split
 
 X = []
 Y = []
 window_size=100
 for i in range(1 , len(df) - window_size -1 , 1):
-    first = df.iloc[i,3]
+    first = df.iloc[i,2]
     temp = []
     temp2 = []
     for j in range(window_size):
-        temp.append((df.iloc[i + j, 3] - first) / first)
-    temp2.append((df.iloc[i + window_size, 3] - first) / first)
+        temp.append((df.iloc[i + j, 2] - first) / first)
+    temp2.append((df.iloc[i + window_size, 2] - first) / first)
     X.append(np.array(temp).reshape(100, 1))
     Y.append(np.array(temp2).reshape(1, 1))
 
@@ -186,11 +235,9 @@ print(len(test_X))
 # 
 # For CNN, the layers are created with sizes 64,128,64. In every layer, TimeDistributed function is added to track the features with respect to time. In between them, Pooling layers are added.
 # 
-# Then a dense layer of 5 neurons with L1 Kernel regularizer is added
-# 
 # After that, it's passed to Bi-LSTM layers
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:36:48.444803Z","iopub.execute_input":"2021-11-28T06:36:48.445259Z","iopub.status.idle":"2021-11-28T06:37:33.257004Z","shell.execute_reply.started":"2021-11-28T06:36:48.445213Z","shell.execute_reply":"2021-11-28T06:37:33.255960Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:49.687430Z","iopub.execute_input":"2021-11-29T11:49:49.689134Z","iopub.status.idle":"2021-11-29T11:50:22.041867Z","shell.execute_reply.started":"2021-11-29T11:49:49.689090Z","shell.execute_reply":"2021-11-29T11:50:22.041168Z"}}
 # For creating model and training
 import tensorflow as tf
 from tensorflow.keras.layers import Conv1D, LSTM, Dense, Dropout, Bidirectional, TimeDistributed
@@ -219,37 +266,59 @@ model.compile(optimizer='adam', loss='mse', metrics=['mse', 'mae'])
 
 history = model.fit(train_X, train_Y, validation_data=(test_X,test_Y), epochs=40,batch_size=40, verbose=1, shuffle =True)
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:37:33.259538Z","iopub.execute_input":"2021-11-28T06:37:33.259890Z","iopub.status.idle":"2021-11-28T06:37:33.668506Z","shell.execute_reply.started":"2021-11-28T06:37:33.259839Z","shell.execute_reply":"2021-11-28T06:37:33.667530Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:22.043225Z","iopub.execute_input":"2021-11-29T11:50:22.043985Z","iopub.status.idle":"2021-11-29T11:50:22.346441Z","shell.execute_reply.started":"2021-11-29T11:50:22.043934Z","shell.execute_reply":"2021-11-29T11:50:22.345646Z"}}
 plt.plot(history.history['loss'], label='train loss')
 plt.plot(history.history['val_loss'], label='val loss')
 plt.xlabel("epoch")
 plt.ylabel("Loss")
 plt.legend()
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:37:33.672887Z","iopub.execute_input":"2021-11-28T06:37:33.673466Z","iopub.status.idle":"2021-11-28T06:37:34.179653Z","shell.execute_reply.started":"2021-11-28T06:37:33.673419Z","shell.execute_reply":"2021-11-28T06:37:34.178608Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:22.347661Z","iopub.execute_input":"2021-11-29T11:50:22.347924Z","iopub.status.idle":"2021-11-29T11:50:22.645362Z","shell.execute_reply.started":"2021-11-29T11:50:22.347891Z","shell.execute_reply":"2021-11-29T11:50:22.644686Z"}}
 plt.plot(history.history['mse'], label='train mse')
 plt.plot(history.history['val_mse'], label='val mse')
 plt.xlabel("epoch")
 plt.ylabel("Loss")
 plt.legend()
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:37:34.182120Z","iopub.execute_input":"2021-11-28T06:37:34.183514Z","iopub.status.idle":"2021-11-28T06:37:34.755047Z","shell.execute_reply.started":"2021-11-28T06:37:34.183340Z","shell.execute_reply":"2021-11-28T06:37:34.753982Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:22.646463Z","iopub.execute_input":"2021-11-29T11:50:22.646708Z","iopub.status.idle":"2021-11-29T11:50:22.953977Z","shell.execute_reply.started":"2021-11-29T11:50:22.646675Z","shell.execute_reply":"2021-11-29T11:50:22.953210Z"}}
 plt.plot(history.history['mae'], label='train mae')
 plt.plot(history.history['val_mae'], label='val mae')
 plt.xlabel("epoch")
 plt.ylabel("Loss")
 plt.legend()
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:37:34.756873Z","iopub.execute_input":"2021-11-28T06:37:34.757327Z","iopub.status.idle":"2021-11-28T06:37:35.089191Z","shell.execute_reply.started":"2021-11-28T06:37:34.757281Z","shell.execute_reply":"2021-11-28T06:37:35.088018Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:22.955289Z","iopub.execute_input":"2021-11-29T11:50:22.955728Z","iopub.status.idle":"2021-11-29T11:50:23.226515Z","shell.execute_reply.started":"2021-11-29T11:50:22.955689Z","shell.execute_reply":"2021-11-29T11:50:23.225682Z"}}
 # After the model has been constructed, we need to train
 from tensorflow.keras.utils import plot_model
 print(model.summary())
 plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True)
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:37:35.091298Z","iopub.execute_input":"2021-11-28T06:37:35.091939Z","iopub.status.idle":"2021-11-28T06:37:35.275864Z","shell.execute_reply.started":"2021-11-28T06:37:35.091871Z","shell.execute_reply":"2021-11-28T06:37:35.274871Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:23.228065Z","iopub.execute_input":"2021-11-29T11:50:23.228669Z","iopub.status.idle":"2021-11-29T11:50:23.361634Z","shell.execute_reply.started":"2021-11-29T11:50:23.228625Z","shell.execute_reply":"2021-11-29T11:50:23.361001Z"}}
 model.evaluate(test_X, test_Y)
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:37:35.277814Z","iopub.execute_input":"2021-11-28T06:37:35.279009Z","iopub.status.idle":"2021-11-28T06:37:37.333830Z","shell.execute_reply.started":"2021-11-28T06:37:35.278964Z","shell.execute_reply":"2021-11-28T06:37:37.332878Z"}}
+# %% [code] {"execution":{"iopub.status.busy":"2021-11-29T11:50:23.363126Z","iopub.execute_input":"2021-11-29T11:50:23.363411Z","iopub.status.idle":"2021-11-29T11:50:24.647024Z","shell.execute_reply.started":"2021-11-29T11:50:23.363373Z","shell.execute_reply":"2021-11-29T11:50:24.644729Z"}}
+from sklearn.metrics import explained_variance_score
+from sklearn.metrics import r2_score
+from sklearn.metrics import max_error
+
+# predict probabilities for test set
+yhat_probs = model.predict(test_X, verbose=0)
+# predict crisp classes for test set
+yhat_classes = model.predict_classes(test_X, verbose=0)
+# reduce to 1d array
+yhat_probs = yhat_probs[:, 0]
+yhat_classes = yhat_classes[:, 0]
+
+var = explained_variance_score(test_Y.reshape(-1,1), yhat_probs)
+print('Variance: %f' % var)
+
+r2 = r2_score(test_Y.reshape(-1,1), yhat_probs)
+print('R2 Score: %f' % var)
+
+var2 = max_error(test_Y.reshape(-1,1), yhat_probs)
+print('Max Error: %f' % var2)
+
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:24.648545Z","iopub.execute_input":"2021-11-29T11:50:24.649089Z","iopub.status.idle":"2021-11-29T11:50:25.043323Z","shell.execute_reply.started":"2021-11-29T11:50:24.649053Z","shell.execute_reply":"2021-11-29T11:50:25.042654Z"}}
 predicted  = model.predict(test_X)
 test_label = test_Y.reshape(-1,1)
 predicted = np.array(predicted[:,0]).reshape(-1,1)
@@ -272,18 +341,18 @@ plt.show()
 # %% [markdown]
 # In this part, the model is saved and loaded back again. Then, it's made to train again but with different data to check it's loss and prediction
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:37:37.335508Z","iopub.execute_input":"2021-11-28T06:37:37.336620Z","iopub.status.idle":"2021-11-28T06:37:37.438424Z","shell.execute_reply.started":"2021-11-28T06:37:37.336566Z","shell.execute_reply":"2021-11-28T06:37:37.437284Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:25.044727Z","iopub.execute_input":"2021-11-29T11:50:25.045508Z","iopub.status.idle":"2021-11-29T11:50:25.117068Z","shell.execute_reply.started":"2021-11-29T11:50:25.045471Z","shell.execute_reply":"2021-11-29T11:50:25.116430Z"}}
 # First we need to save a model
 model.save("model.h5")
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:37:37.440385Z","iopub.execute_input":"2021-11-28T06:37:37.440805Z","iopub.status.idle":"2021-11-28T06:37:38.802568Z","shell.execute_reply.started":"2021-11-28T06:37:37.440762Z","shell.execute_reply":"2021-11-28T06:37:38.801587Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:25.118216Z","iopub.execute_input":"2021-11-29T11:50:25.118476Z","iopub.status.idle":"2021-11-29T11:50:26.089270Z","shell.execute_reply.started":"2021-11-29T11:50:25.118440Z","shell.execute_reply":"2021-11-29T11:50:26.088429Z"}}
 # Load model
 new_model = tf.keras.models.load_model("./model.h5")
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:37:38.804463Z","iopub.execute_input":"2021-11-28T06:37:38.804781Z","iopub.status.idle":"2021-11-28T06:37:38.823022Z","shell.execute_reply.started":"2021-11-28T06:37:38.804739Z","shell.execute_reply":"2021-11-28T06:37:38.822027Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:26.090741Z","iopub.execute_input":"2021-11-29T11:50:26.091061Z","iopub.status.idle":"2021-11-29T11:50:26.104857Z","shell.execute_reply.started":"2021-11-29T11:50:26.091023Z","shell.execute_reply":"2021-11-29T11:50:26.104130Z"}}
 new_model.summary()
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:37:38.824264Z","iopub.execute_input":"2021-11-28T06:37:38.824797Z","iopub.status.idle":"2021-11-28T06:38:03.646696Z","shell.execute_reply.started":"2021-11-28T06:37:38.824753Z","shell.execute_reply":"2021-11-28T06:38:03.644741Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:26.106061Z","iopub.execute_input":"2021-11-29T11:50:26.106487Z","iopub.status.idle":"2021-11-29T11:50:42.645240Z","shell.execute_reply.started":"2021-11-29T11:50:26.106450Z","shell.execute_reply":"2021-11-29T11:50:42.643860Z"}}
 # For data preprocessing and analysis part
 #data2 = pd.read_csv('../input/price-volume-data-for-all-us-stocks-etfs/Stocks/aaoi.us.txt')
 #data2 = pd.read_csv('../input/nifty50-stock-market-data/SBIN.csv')
@@ -330,7 +399,7 @@ test_X = test_X.reshape(test_X.shape[0],1,100,1)
 print(len(train_X))
 print(len(test_X))
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-28T06:38:03.648932Z","iopub.execute_input":"2021-11-28T06:38:03.649725Z","iopub.status.idle":"2021-11-28T06:38:04.245123Z","shell.execute_reply.started":"2021-11-28T06:38:03.649677Z","shell.execute_reply":"2021-11-28T06:38:04.244134Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:42.646454Z","iopub.execute_input":"2021-11-29T11:50:42.647286Z","iopub.status.idle":"2021-11-29T11:50:43.111315Z","shell.execute_reply.started":"2021-11-29T11:50:42.647246Z","shell.execute_reply":"2021-11-29T11:50:43.110619Z"}}
 predicted  = model.predict(test_X)
 test_label = test_Y.reshape(-1,1)
 predicted = np.array(predicted[:,0]).reshape(-1,1)
@@ -346,3 +415,5 @@ plt.xlabel('Time')
 plt.ylabel(' Stock Price')
 plt.legend()
 plt.show()
+
+# %% [code] {"jupyter":{"outputs_hidden":false}}
