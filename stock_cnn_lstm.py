@@ -2,7 +2,7 @@
 # # Stock Market Analysis using CNN-LSTM model
 # This project is about analysis of Stock Market and providing suggestions and predictions to the stockholders. For this, we used CNN-LSTM approach to create a blank model, then use it to train on stock market data. Further implementation is discussed below...
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:47:50.820187Z","iopub.execute_input":"2021-11-29T11:47:50.820801Z","iopub.status.idle":"2021-11-29T11:47:50.825269Z","shell.execute_reply.started":"2021-11-29T11:47:50.820743Z","shell.execute_reply":"2021-11-29T11:47:50.824484Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:27:50.497697Z","iopub.execute_input":"2021-11-30T00:27:50.497978Z","iopub.status.idle":"2021-11-30T00:27:50.597648Z","shell.execute_reply.started":"2021-11-30T00:27:50.497903Z","shell.execute_reply":"2021-11-30T00:27:50.596977Z"}}
 # This Python 3 environment comes with many helpful analytics libraries installed
 # It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python
 # For example, here's several helpful packages to load
@@ -24,7 +24,7 @@ import os
 # %% [markdown]
 # ## Data Preprocessing and Analysis
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:47:50.835758Z","iopub.execute_input":"2021-11-29T11:47:50.835970Z","iopub.status.idle":"2021-11-29T11:47:50.848974Z","shell.execute_reply.started":"2021-11-29T11:47:50.835948Z","shell.execute_reply":"2021-11-29T11:47:50.848218Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:27:50.599512Z","iopub.execute_input":"2021-11-30T00:27:50.59981Z","iopub.status.idle":"2021-11-30T00:27:51.386526Z","shell.execute_reply.started":"2021-11-30T00:27:50.599777Z","shell.execute_reply":"2021-11-30T00:27:51.385531Z"}}
 import math
 import seaborn as sns
 import datetime as dt
@@ -38,7 +38,7 @@ plt.style.use("ggplot")
 # %% [markdown]
 # First we'd read the CSV file and then drop the null columns. Then we'd check the columns (some not all)
 
-# %% [code] {"_kg_hide-input":true,"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:47:50.852563Z","iopub.execute_input":"2021-11-29T11:47:50.852877Z","iopub.status.idle":"2021-11-29T11:47:50.860831Z","shell.execute_reply.started":"2021-11-29T11:47:50.852851Z","shell.execute_reply":"2021-11-29T11:47:50.859967Z"}}
+# %% [code] {"_kg_hide-input":true,"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:27:51.392224Z","iopub.execute_input":"2021-11-30T00:27:51.392524Z","iopub.status.idle":"2021-11-30T00:27:51.412896Z","shell.execute_reply.started":"2021-11-30T00:27:51.392484Z","shell.execute_reply":"2021-11-30T00:27:51.411899Z"}}
 #1DP18XAREYFRWP4I
 import requests
 import csv
@@ -63,12 +63,12 @@ def request_stock_price_list(symbol, size, token):
     df['date'] = date
     return df
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:47:50.865172Z","iopub.execute_input":"2021-11-29T11:47:50.865830Z","iopub.status.idle":"2021-11-29T11:49:35.584715Z","shell.execute_reply.started":"2021-11-29T11:47:50.865795Z","shell.execute_reply":"2021-11-29T11:49:35.583887Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:27:51.418749Z","iopub.execute_input":"2021-11-30T00:27:51.419144Z","iopub.status.idle":"2021-11-30T00:29:40.058709Z","shell.execute_reply.started":"2021-11-30T00:27:51.41911Z","shell.execute_reply":"2021-11-30T00:29:40.057926Z"}}
 cv1 = request_stock_price_list('IBM', 'full', key)
 print(cv1.head)
 cv1.to_csv('data.csv')
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:35.586527Z","iopub.execute_input":"2021-11-29T11:49:35.586830Z","iopub.status.idle":"2021-11-29T11:49:35.613479Z","shell.execute_reply.started":"2021-11-29T11:49:35.586795Z","shell.execute_reply":"2021-11-29T11:49:35.612687Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:29:40.060156Z","iopub.execute_input":"2021-11-30T00:29:40.060799Z","iopub.status.idle":"2021-11-30T00:29:40.121198Z","shell.execute_reply.started":"2021-11-30T00:29:40.060757Z","shell.execute_reply":"2021-11-30T00:29:40.120409Z"}}
 # For data preprocessing and analysis part
 data = pd.read_csv('../input/price-volume-data-for-all-us-stocks-etfs/Stocks/abe.us.txt')
 #data = pd.read_csv('../input/nifty50-stock-market-data/COALINDIA.csv')
@@ -78,21 +78,21 @@ data = pd.read_csv('../input/price-volume-data-for-all-us-stocks-etfs/Stocks/abe
 data.dropna(inplace=True)
 data.head()
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:35.614531Z","iopub.execute_input":"2021-11-29T11:49:35.615131Z","iopub.status.idle":"2021-11-29T11:49:35.630304Z","shell.execute_reply.started":"2021-11-29T11:49:35.615094Z","shell.execute_reply":"2021-11-29T11:49:35.629643Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:29:40.122598Z","iopub.execute_input":"2021-11-30T00:29:40.122893Z","iopub.status.idle":"2021-11-30T00:29:40.143151Z","shell.execute_reply.started":"2021-11-30T00:29:40.122856Z","shell.execute_reply":"2021-11-30T00:29:40.142393Z"}}
 data.info()
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:35.632354Z","iopub.execute_input":"2021-11-29T11:49:35.633032Z","iopub.status.idle":"2021-11-29T11:49:35.660603Z","shell.execute_reply.started":"2021-11-29T11:49:35.632997Z","shell.execute_reply":"2021-11-29T11:49:35.659673Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:29:40.144532Z","iopub.execute_input":"2021-11-30T00:29:40.145001Z","iopub.status.idle":"2021-11-30T00:29:40.181397Z","shell.execute_reply.started":"2021-11-30T00:29:40.14496Z","shell.execute_reply":"2021-11-30T00:29:40.180645Z"}}
 data.describe()
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:35.661816Z","iopub.execute_input":"2021-11-29T11:49:35.662061Z","iopub.status.idle":"2021-11-29T11:49:35.671552Z","shell.execute_reply.started":"2021-11-29T11:49:35.662029Z","shell.execute_reply":"2021-11-29T11:49:35.670543Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:29:40.182766Z","iopub.execute_input":"2021-11-30T00:29:40.183055Z","iopub.status.idle":"2021-11-30T00:29:40.193634Z","shell.execute_reply.started":"2021-11-30T00:29:40.183022Z","shell.execute_reply":"2021-11-30T00:29:40.192757Z"}}
 data.isnull().sum()
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:35.673276Z","iopub.execute_input":"2021-11-29T11:49:35.673525Z","iopub.status.idle":"2021-11-29T11:49:35.693157Z","shell.execute_reply.started":"2021-11-29T11:49:35.673493Z","shell.execute_reply":"2021-11-29T11:49:35.692377Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:29:40.195386Z","iopub.execute_input":"2021-11-30T00:29:40.196251Z","iopub.status.idle":"2021-11-30T00:29:40.224296Z","shell.execute_reply.started":"2021-11-30T00:29:40.196215Z","shell.execute_reply":"2021-11-30T00:29:40.223475Z"}}
 data.reset_index(drop=True, inplace=True)
 data.fillna(data.mean(), inplace=True)
 data.head()
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:35.694376Z","iopub.execute_input":"2021-11-29T11:49:35.694685Z","iopub.status.idle":"2021-11-29T11:49:38.978148Z","shell.execute_reply.started":"2021-11-29T11:49:35.694650Z","shell.execute_reply":"2021-11-29T11:49:38.977468Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:29:40.228014Z","iopub.execute_input":"2021-11-30T00:29:40.228971Z","iopub.status.idle":"2021-11-30T00:29:44.024048Z","shell.execute_reply.started":"2021-11-30T00:29:40.228932Z","shell.execute_reply":"2021-11-30T00:29:44.02076Z"}}
 data.plot(legend=True,subplots=True, figsize = (12, 6))
 plt.show()
 #data['Close'].plot(legend=True, figsize = (12, 6))
@@ -149,7 +149,7 @@ data.isnull().sum()
 # %% [markdown]
 # After that, we'll visualize the data for understanding, this is shown below...
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:38.979375Z","iopub.execute_input":"2021-11-29T11:49:38.979961Z","iopub.status.idle":"2021-11-29T11:49:39.668971Z","shell.execute_reply.started":"2021-11-29T11:49:38.979925Z","shell.execute_reply":"2021-11-29T11:49:39.668283Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:29:44.033492Z","iopub.execute_input":"2021-11-30T00:29:44.034278Z","iopub.status.idle":"2021-11-30T00:29:44.846261Z","shell.execute_reply.started":"2021-11-30T00:29:44.034231Z","shell.execute_reply":"2021-11-30T00:29:44.845554Z"}}
 cols_plot = ['Open', 'High', 'Low','Close']
 axes = data[cols_plot].plot(marker='.', alpha=0.5, linestyle='None', figsize=(11, 9), subplots=True)
 for ax in axes:
@@ -158,7 +158,7 @@ for ax in axes:
 # %% [markdown]
 # Then we'd print the data after making changes and dropping null data
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:39.669994Z","iopub.execute_input":"2021-11-29T11:49:39.670363Z","iopub.status.idle":"2021-11-29T11:49:39.982338Z","shell.execute_reply.started":"2021-11-29T11:49:39.670329Z","shell.execute_reply":"2021-11-29T11:49:39.981674Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:29:44.847737Z","iopub.execute_input":"2021-11-30T00:29:44.848257Z","iopub.status.idle":"2021-11-30T00:29:45.183855Z","shell.execute_reply.started":"2021-11-30T00:29:44.848222Z","shell.execute_reply":"2021-11-30T00:29:45.183076Z"}}
 plt.plot(data['Close'], label="Close price")
 plt.xlabel("Timestamp")
 plt.ylabel("Closing price")
@@ -167,7 +167,7 @@ print(df)
 
 df.describe().transpose()
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:39.985253Z","iopub.execute_input":"2021-11-29T11:49:39.985471Z","iopub.status.idle":"2021-11-29T11:49:40.575017Z","shell.execute_reply.started":"2021-11-29T11:49:39.985440Z","shell.execute_reply":"2021-11-29T11:49:40.574242Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:29:45.185259Z","iopub.execute_input":"2021-11-30T00:29:45.185674Z","iopub.status.idle":"2021-11-30T00:29:46.155798Z","shell.execute_reply.started":"2021-11-30T00:29:45.185635Z","shell.execute_reply":"2021-11-30T00:29:46.155005Z"}}
 X = data.drop(['Date', 'Close'], axis=1)
 Y = data['Close']
 
@@ -198,7 +198,7 @@ df = new_data
 # %% [markdown]
 # The data has been analysed but it must be converted into data of shape [100,1] to make it easier for CNN to train on... Else it won't select necessary features and the model will fail
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:40.576159Z","iopub.execute_input":"2021-11-29T11:49:40.576423Z","iopub.status.idle":"2021-11-29T11:49:49.686255Z","shell.execute_reply.started":"2021-11-29T11:49:40.576386Z","shell.execute_reply":"2021-11-29T11:49:49.685428Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:29:46.157247Z","iopub.execute_input":"2021-11-30T00:29:46.157713Z","iopub.status.idle":"2021-11-30T00:29:55.574983Z","shell.execute_reply.started":"2021-11-30T00:29:46.157657Z","shell.execute_reply":"2021-11-30T00:29:55.574154Z"}}
 from sklearn.model_selection import train_test_split
 
 X = []
@@ -237,7 +237,7 @@ print(len(test_X))
 # 
 # After that, it's passed to Bi-LSTM layers
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:49:49.687430Z","iopub.execute_input":"2021-11-29T11:49:49.689134Z","iopub.status.idle":"2021-11-29T11:50:22.041867Z","shell.execute_reply.started":"2021-11-29T11:49:49.689090Z","shell.execute_reply":"2021-11-29T11:50:22.041168Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:29:55.576169Z","iopub.execute_input":"2021-11-30T00:29:55.577005Z","iopub.status.idle":"2021-11-30T00:30:42.387455Z","shell.execute_reply.started":"2021-11-30T00:29:55.576965Z","shell.execute_reply":"2021-11-30T00:30:42.386656Z"}}
 # For creating model and training
 import tensorflow as tf
 from tensorflow.keras.layers import Conv1D, LSTM, Dense, Dropout, Bidirectional, TimeDistributed
@@ -266,37 +266,37 @@ model.compile(optimizer='adam', loss='mse', metrics=['mse', 'mae'])
 
 history = model.fit(train_X, train_Y, validation_data=(test_X,test_Y), epochs=40,batch_size=40, verbose=1, shuffle =True)
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:22.043225Z","iopub.execute_input":"2021-11-29T11:50:22.043985Z","iopub.status.idle":"2021-11-29T11:50:22.346441Z","shell.execute_reply.started":"2021-11-29T11:50:22.043934Z","shell.execute_reply":"2021-11-29T11:50:22.345646Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:30:42.389187Z","iopub.execute_input":"2021-11-30T00:30:42.389874Z","iopub.status.idle":"2021-11-30T00:30:42.711243Z","shell.execute_reply.started":"2021-11-30T00:30:42.389835Z","shell.execute_reply":"2021-11-30T00:30:42.710554Z"}}
 plt.plot(history.history['loss'], label='train loss')
 plt.plot(history.history['val_loss'], label='val loss')
 plt.xlabel("epoch")
 plt.ylabel("Loss")
 plt.legend()
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:22.347661Z","iopub.execute_input":"2021-11-29T11:50:22.347924Z","iopub.status.idle":"2021-11-29T11:50:22.645362Z","shell.execute_reply.started":"2021-11-29T11:50:22.347891Z","shell.execute_reply":"2021-11-29T11:50:22.644686Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:30:42.71256Z","iopub.execute_input":"2021-11-30T00:30:42.713097Z","iopub.status.idle":"2021-11-30T00:30:43.032936Z","shell.execute_reply.started":"2021-11-30T00:30:42.713059Z","shell.execute_reply":"2021-11-30T00:30:43.032156Z"}}
 plt.plot(history.history['mse'], label='train mse')
 plt.plot(history.history['val_mse'], label='val mse')
 plt.xlabel("epoch")
 plt.ylabel("Loss")
 plt.legend()
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:22.646463Z","iopub.execute_input":"2021-11-29T11:50:22.646708Z","iopub.status.idle":"2021-11-29T11:50:22.953977Z","shell.execute_reply.started":"2021-11-29T11:50:22.646675Z","shell.execute_reply":"2021-11-29T11:50:22.953210Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:30:43.034562Z","iopub.execute_input":"2021-11-30T00:30:43.035018Z","iopub.status.idle":"2021-11-30T00:30:43.356383Z","shell.execute_reply.started":"2021-11-30T00:30:43.034981Z","shell.execute_reply":"2021-11-30T00:30:43.355742Z"}}
 plt.plot(history.history['mae'], label='train mae')
 plt.plot(history.history['val_mae'], label='val mae')
 plt.xlabel("epoch")
 plt.ylabel("Loss")
 plt.legend()
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:22.955289Z","iopub.execute_input":"2021-11-29T11:50:22.955728Z","iopub.status.idle":"2021-11-29T11:50:23.226515Z","shell.execute_reply.started":"2021-11-29T11:50:22.955689Z","shell.execute_reply":"2021-11-29T11:50:23.225682Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:30:43.357648Z","iopub.execute_input":"2021-11-30T00:30:43.358041Z","iopub.status.idle":"2021-11-30T00:30:44.323425Z","shell.execute_reply.started":"2021-11-30T00:30:43.358006Z","shell.execute_reply":"2021-11-30T00:30:44.322588Z"}}
 # After the model has been constructed, we need to train
 from tensorflow.keras.utils import plot_model
 print(model.summary())
 plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True)
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:23.228065Z","iopub.execute_input":"2021-11-29T11:50:23.228669Z","iopub.status.idle":"2021-11-29T11:50:23.361634Z","shell.execute_reply.started":"2021-11-29T11:50:23.228625Z","shell.execute_reply":"2021-11-29T11:50:23.361001Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:30:44.325061Z","iopub.execute_input":"2021-11-30T00:30:44.325946Z","iopub.status.idle":"2021-11-30T00:30:44.494354Z","shell.execute_reply.started":"2021-11-30T00:30:44.325907Z","shell.execute_reply":"2021-11-30T00:30:44.493555Z"}}
 model.evaluate(test_X, test_Y)
 
-# %% [code] {"execution":{"iopub.status.busy":"2021-11-29T11:50:23.363126Z","iopub.execute_input":"2021-11-29T11:50:23.363411Z","iopub.status.idle":"2021-11-29T11:50:24.647024Z","shell.execute_reply.started":"2021-11-29T11:50:23.363373Z","shell.execute_reply":"2021-11-29T11:50:24.644729Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:30:44.49592Z","iopub.execute_input":"2021-11-30T00:30:44.496435Z","iopub.status.idle":"2021-11-30T00:30:45.842253Z","shell.execute_reply.started":"2021-11-30T00:30:44.496399Z","shell.execute_reply":"2021-11-30T00:30:45.841411Z"}}
 from sklearn.metrics import explained_variance_score
 from sklearn.metrics import r2_score
 from sklearn.metrics import max_error
@@ -318,7 +318,7 @@ print('R2 Score: %f' % var)
 var2 = max_error(test_Y.reshape(-1,1), yhat_probs)
 print('Max Error: %f' % var2)
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:24.648545Z","iopub.execute_input":"2021-11-29T11:50:24.649089Z","iopub.status.idle":"2021-11-29T11:50:25.043323Z","shell.execute_reply.started":"2021-11-29T11:50:24.649053Z","shell.execute_reply":"2021-11-29T11:50:25.042654Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:30:45.843592Z","iopub.execute_input":"2021-11-30T00:30:45.844369Z","iopub.status.idle":"2021-11-30T00:30:46.252205Z","shell.execute_reply.started":"2021-11-30T00:30:45.844327Z","shell.execute_reply":"2021-11-30T00:30:46.251541Z"}}
 predicted  = model.predict(test_X)
 test_label = test_Y.reshape(-1,1)
 predicted = np.array(predicted[:,0]).reshape(-1,1)
@@ -341,18 +341,18 @@ plt.show()
 # %% [markdown]
 # In this part, the model is saved and loaded back again. Then, it's made to train again but with different data to check it's loss and prediction
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:25.044727Z","iopub.execute_input":"2021-11-29T11:50:25.045508Z","iopub.status.idle":"2021-11-29T11:50:25.117068Z","shell.execute_reply.started":"2021-11-29T11:50:25.045471Z","shell.execute_reply":"2021-11-29T11:50:25.116430Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:30:46.253495Z","iopub.execute_input":"2021-11-30T00:30:46.254343Z","iopub.status.idle":"2021-11-30T00:30:46.330456Z","shell.execute_reply.started":"2021-11-30T00:30:46.254307Z","shell.execute_reply":"2021-11-30T00:30:46.329751Z"}}
 # First we need to save a model
 model.save("model.h5")
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:25.118216Z","iopub.execute_input":"2021-11-29T11:50:25.118476Z","iopub.status.idle":"2021-11-29T11:50:26.089270Z","shell.execute_reply.started":"2021-11-29T11:50:25.118440Z","shell.execute_reply":"2021-11-29T11:50:26.088429Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:30:46.331751Z","iopub.execute_input":"2021-11-30T00:30:46.332024Z","iopub.status.idle":"2021-11-30T00:30:47.61497Z","shell.execute_reply.started":"2021-11-30T00:30:46.331991Z","shell.execute_reply":"2021-11-30T00:30:47.614193Z"}}
 # Load model
 new_model = tf.keras.models.load_model("./model.h5")
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:26.090741Z","iopub.execute_input":"2021-11-29T11:50:26.091061Z","iopub.status.idle":"2021-11-29T11:50:26.104857Z","shell.execute_reply.started":"2021-11-29T11:50:26.091023Z","shell.execute_reply":"2021-11-29T11:50:26.104130Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:30:47.619112Z","iopub.execute_input":"2021-11-30T00:30:47.619389Z","iopub.status.idle":"2021-11-30T00:30:47.634084Z","shell.execute_reply.started":"2021-11-30T00:30:47.619355Z","shell.execute_reply":"2021-11-30T00:30:47.63318Z"}}
 new_model.summary()
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:26.106061Z","iopub.execute_input":"2021-11-29T11:50:26.106487Z","iopub.status.idle":"2021-11-29T11:50:42.645240Z","shell.execute_reply.started":"2021-11-29T11:50:26.106450Z","shell.execute_reply":"2021-11-29T11:50:42.643860Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:30:47.635384Z","iopub.execute_input":"2021-11-30T00:30:47.635817Z","iopub.status.idle":"2021-11-30T00:31:04.609129Z","shell.execute_reply.started":"2021-11-30T00:30:47.635781Z","shell.execute_reply":"2021-11-30T00:31:04.607737Z"}}
 # For data preprocessing and analysis part
 #data2 = pd.read_csv('../input/price-volume-data-for-all-us-stocks-etfs/Stocks/aaoi.us.txt')
 #data2 = pd.read_csv('../input/nifty50-stock-market-data/SBIN.csv')
@@ -399,7 +399,7 @@ test_X = test_X.reshape(test_X.shape[0],1,100,1)
 print(len(train_X))
 print(len(test_X))
 
-# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-29T11:50:42.646454Z","iopub.execute_input":"2021-11-29T11:50:42.647286Z","iopub.status.idle":"2021-11-29T11:50:43.111315Z","shell.execute_reply.started":"2021-11-29T11:50:42.647246Z","shell.execute_reply":"2021-11-29T11:50:43.110619Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:31:04.610441Z","iopub.execute_input":"2021-11-30T00:31:04.610867Z","iopub.status.idle":"2021-11-30T00:31:05.077092Z","shell.execute_reply.started":"2021-11-30T00:31:04.610822Z","shell.execute_reply":"2021-11-30T00:31:05.076072Z"}}
 predicted  = model.predict(test_X)
 test_label = test_Y.reshape(-1,1)
 predicted = np.array(predicted[:,0]).reshape(-1,1)
@@ -416,4 +416,87 @@ plt.ylabel(' Stock Price')
 plt.legend()
 plt.show()
 
-# %% [code] {"jupyter":{"outputs_hidden":false}}
+# %% [markdown]
+# # EDA
+
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2021-11-30T00:41:04.131327Z","iopub.execute_input":"2021-11-30T00:41:04.131641Z","iopub.status.idle":"2021-11-30T00:41:04.167147Z","shell.execute_reply.started":"2021-11-30T00:41:04.131612Z","shell.execute_reply":"2021-11-30T00:41:04.166248Z"}}
+dataX = pd.read_csv('./data.csv')
+dataY = pd.read_csv('./data.csv')
+dataX.info()
+
+# %% [code] {"execution":{"iopub.status.busy":"2021-11-30T00:41:07.441649Z","iopub.execute_input":"2021-11-30T00:41:07.442353Z","iopub.status.idle":"2021-11-30T00:41:07.458392Z","shell.execute_reply.started":"2021-11-30T00:41:07.442321Z","shell.execute_reply":"2021-11-30T00:41:07.457719Z"}}
+dataX.head()
+
+# %% [code] {"execution":{"iopub.status.busy":"2021-11-30T00:41:10.802318Z","iopub.execute_input":"2021-11-30T00:41:10.803193Z","iopub.status.idle":"2021-11-30T00:41:10.838462Z","shell.execute_reply.started":"2021-11-30T00:41:10.803154Z","shell.execute_reply":"2021-11-30T00:41:10.837748Z"}}
+start_date = '2020-01-01'
+end_date = '2021-11-29'
+
+start = '2018-01-01'
+end = '2020-01-01'
+
+fill = (dataX['date']>=start_date) & (dataX['date']<=end_date)
+dataX = dataX.loc[fill]
+dataX
+
+
+# %% [code] {"execution":{"iopub.status.busy":"2021-11-30T00:41:13.838014Z","iopub.execute_input":"2021-11-30T00:41:13.838274Z","iopub.status.idle":"2021-11-30T00:41:13.870051Z","shell.execute_reply.started":"2021-11-30T00:41:13.838249Z","shell.execute_reply":"2021-11-30T00:41:13.869107Z"}}
+fill2 = (dataY['date']>=start) & (dataY['date']<=end)
+dataY = dataY.loc[fill2]
+dataY
+
+# %% [code] {"execution":{"iopub.status.busy":"2021-11-30T00:41:17.009971Z","iopub.execute_input":"2021-11-30T00:41:17.010531Z","iopub.status.idle":"2021-11-30T00:41:17.051379Z","shell.execute_reply.started":"2021-11-30T00:41:17.010474Z","shell.execute_reply":"2021-11-30T00:41:17.050509Z"}}
+dataX.describe()
+
+# %% [code] {"execution":{"iopub.status.busy":"2021-11-30T00:41:19.598566Z","iopub.execute_input":"2021-11-30T00:41:19.599179Z","iopub.status.idle":"2021-11-30T00:41:19.644959Z","shell.execute_reply.started":"2021-11-30T00:41:19.599141Z","shell.execute_reply":"2021-11-30T00:41:19.64422Z"}}
+dataY.describe()
+
+# %% [code] {"execution":{"iopub.status.busy":"2021-11-30T00:42:27.313943Z","iopub.execute_input":"2021-11-30T00:42:27.314244Z","iopub.status.idle":"2021-11-30T00:42:27.670252Z","shell.execute_reply.started":"2021-11-30T00:42:27.314215Z","shell.execute_reply":"2021-11-30T00:42:27.669576Z"}}
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+from sklearn.model_selection import train_test_split,GridSearchCV,RandomizedSearchCV
+from sklearn.linear_model import LinearRegression,Ridge,Lasso
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor,GradientBoostingRegressor
+from sklearn.metrics import r2_score,mean_squared_error
+
+sns_plot = sns.distplot(dataX['close'])
+sns_plot2 = sns.distplot(dataY['close'])
+
+# %% [code] {"execution":{"iopub.status.busy":"2021-11-30T00:44:44.730718Z","iopub.execute_input":"2021-11-30T00:44:44.73141Z","iopub.status.idle":"2021-11-30T00:44:46.789448Z","shell.execute_reply.started":"2021-11-30T00:44:44.731376Z","shell.execute_reply":"2021-11-30T00:44:46.788715Z"}}
+fig, ax = plt.subplots(4, 2, figsize = (15, 13))
+sns.boxplot(x= dataX["close"], ax = ax[0,0])
+sns.distplot(dataX['close'], ax = ax[0,1])
+sns.boxplot(x= dataX["open"], ax = ax[1,0])
+sns.distplot(dataX['open'], ax = ax[1,1])
+sns.boxplot(x= dataX["high"], ax = ax[2,0])
+sns.distplot(dataX['high'], ax = ax[2,1])
+sns.boxplot(x= dataX["low"], ax = ax[3,0])
+sns.distplot(dataX['low'], ax = ax[3,1])
+plt.tight_layout()
+
+# %% [code] {"execution":{"iopub.status.busy":"2021-11-30T00:45:22.898902Z","iopub.execute_input":"2021-11-30T00:45:22.899712Z","iopub.status.idle":"2021-11-30T00:45:24.913058Z","shell.execute_reply.started":"2021-11-30T00:45:22.899676Z","shell.execute_reply":"2021-11-30T00:45:24.912176Z"}}
+fig, ax = plt.subplots(4, 2, figsize = (15, 13))
+sns.boxplot(x= dataY["close"], ax = ax[0,0])
+sns.distplot(dataY['close'], ax = ax[0,1])
+sns.boxplot(x= dataY["open"], ax = ax[1,0])
+sns.distplot(dataY['open'], ax = ax[1,1])
+sns.boxplot(x= dataY["high"], ax = ax[2,0])
+sns.distplot(dataY['high'], ax = ax[2,1])
+sns.boxplot(x= dataY["low"], ax = ax[3,0])
+sns.distplot(dataY['low'], ax = ax[3,1])
+plt.tight_layout()
+
+# %% [code] {"execution":{"iopub.status.busy":"2021-11-30T00:48:14.241054Z","iopub.execute_input":"2021-11-30T00:48:14.242004Z","iopub.status.idle":"2021-11-30T00:48:14.913312Z","shell.execute_reply.started":"2021-11-30T00:48:14.241963Z","shell.execute_reply":"2021-11-30T00:48:14.910242Z"}}
+plt.figure(figsize=(10,6))
+sns.heatmap(dataX.corr(),cmap=plt.cm.Reds,annot=True)
+plt.title('Heatmap displaying the relationship between the features of the data (During COVID)',
+         fontsize=13)
+plt.show()
+
+# %% [code] {"execution":{"iopub.status.busy":"2021-11-30T00:48:39.280052Z","iopub.execute_input":"2021-11-30T00:48:39.280311Z","iopub.status.idle":"2021-11-30T00:48:39.872445Z","shell.execute_reply.started":"2021-11-30T00:48:39.280284Z","shell.execute_reply":"2021-11-30T00:48:39.87159Z"}}
+plt.figure(figsize=(10,6))
+sns.heatmap(dataY.corr(),cmap=plt.cm.Blues,annot=True)
+plt.title('Heatmap displaying the relationship between the features of the data (Before COVID)',
+         fontsize=13)
+plt.show()
+
+# %% [code]
