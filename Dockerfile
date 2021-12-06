@@ -1,6 +1,18 @@
-FROM tensorflow:latest
+FROM debian:stable-slim
+RUN apt-get update
+RUN apt install -y python3 python3-pip wget
+RUN pip3 install --no-cache-dir setuptools
+ENV PATH="/root/miniconda3/bin:${PATH}"
+ARG PATH="/root/miniconda3/bin:${PATH}"
+RUN wget \
+    https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+    && mkdir /root/.conda \
+    && bash Miniconda3-latest-Linux-x86_64.sh -b \
+    && rm -f Miniconda3-latest-Linux-x86_64.sh 
+RUN conda install -c conda-forge tensorflow
 RUN pip3 install matplotlib pandas seaborn scikit-learn
-WORKDIR /
+RUN mkdir src
+WORKDIR /src/
 COPY . .
 RUN pip3 install jupyterlab
 # Add Tini. Tini operates as a process subreaper for jupyter. This prevents kernel crashes.
