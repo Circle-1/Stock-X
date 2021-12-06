@@ -1,6 +1,6 @@
 FROM python:slim-bullseye
 RUN pip3 install --no-cache-dir setuptools
-RUN pip3 install https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow_cpu-2.7.0-cp37-cp37m-manylinux2010_x86_64.whl
+RUN pip3 install tensorflow
 RUN pip3 install matplotlib pandas seaborn scikit-learn
 WORKDIR /
 COPY . .
