@@ -1,4 +1,4 @@
-FROM python:slim-bullseye
+FROM python:bullseye
 RUN pip3 install --no-cache-dir setuptools
 RUN pip3 install tensorflow
 RUN pip3 install matplotlib pandas seaborn scikit-learn
