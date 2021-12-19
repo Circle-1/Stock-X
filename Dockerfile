@@ -1,8 +1,8 @@
 FROM ubuntu:impish
+RUN echo "Asia/Kolkata" | tee /etc/timezone
+RUN dpkg-reconfigure --frontend noninteractive tzdata
 RUN apt-get update
 RUN apt install -y python3 python3-pip wget
-RUN echo "Asia/Kolkata" | tee /etc/timezone
-RUN dkpg-reconfigure --frontend noninteractive tzdata
 RUN pip3 install --no-cache-dir setuptools
 ENV PATH="/root/miniconda3/bin:${PATH}"
 ARG PATH="/root/miniconda3/bin:${PATH}"
