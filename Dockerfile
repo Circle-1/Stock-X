@@ -1,6 +1,4 @@
-FROM ubuntu:impish
-RUN echo "Asia/Kolkata" | tee /etc/timezone
-RUN dpkg-reconfigure --frontend noninteractive tzdata
+FROM ubuntu:latest
 RUN apt-get update
 RUN apt install -y python3 python3-pip wget
 RUN pip3 install --no-cache-dir setuptools
