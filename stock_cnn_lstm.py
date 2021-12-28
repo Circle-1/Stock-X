@@ -48,20 +48,20 @@ import csv
 from tqdm import tqdm
 
 def request_stock_price_list(symbol, size, token):
-    q_string = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={}&outputsize={}&apikey={}'
+    q_string = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={}&outputsize={}&apikey={}'
     
     print("Retrieving stock price data from Alpha Vantage (This may take a while)...")
     r = requests.get(q_string.format(symbol, size, token))
     print("Data has been successfully downloaded...")
     date = []
-    colnames = list(range(0, 7))
+    colnames = list(range(0, 5))
     df = pd.DataFrame(columns = colnames)
     print("Sorting the retrieved data into a dataframe...")
     for i in tqdm(r.json()['Time Series (Daily)'].keys()):
         date.append(i)
         row = pd.DataFrame.from_dict(r.json()['Time Series (Daily)'][i], orient='index').reset_index().T[1:]
         df = pd.concat([df, row], ignore_index=True)
-    df.columns = ["open", "high", "low", "close", "adjusted close", "volume", "dividend amount", "split cf"]
+    df.columns = ["open", "high", "low", "close", "volume"]
     df['date'] = date
     return df
 
@@ -242,7 +242,7 @@ model.add(TimeDistributed(Flatten()))
 
 # LSTM layers
 model.add(Bidirectional(LSTM(100, return_sequences=True)))
-model.add(Dropout(0.25))
+model.add(Dropout(0.5))
 model.add(Bidirectional(LSTM(100, return_sequences=False)))
 model.add(Dropout(0.5))
 
@@ -369,7 +369,7 @@ for i in range(1 , len(df2) - window_size -1 , 1):
     X.append(np.array(temp).reshape(100, 1))
     Y.append(np.array(temp2).reshape(1, 1))
 
-x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, shuffle=True)
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, shuffle=False)
 
 train_X = np.array(x_train)
 test_X = np.array(x_test)
