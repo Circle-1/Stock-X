@@ -26,4 +26,9 @@ Helm charts: [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifa
 
 ## Neural Network type
 
-Here CNN (with Time Distributed function) and Bi-LSTM combined Neural Network is used to train.
+Here CNN (with Time Distributed function) and Bi-LSTM combined Neural Network is used to train. Other algorithms like XGBoost, RNN-LSTM, LSTM-GRU are also added for comparison. Here are the links to view the notebooks directly. You can also view the results in the app created using [Mercury](https://mljar.com/mercury/) which is deployed over Heroku (free dyno).
+
+ - [CNN-LSTM](stock-market-prediction-using-cnn-lstm.ipynb)
+ - [LSTM-GRU](lstm_gru_model.ipynb)
+ - [RNN-LSTM](RNN-LSTM.ipynb)
+ - [XGBoost](regressor-model.ipynb)
