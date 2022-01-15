@@ -1,8 +1,2 @@
 mljar-mercury
 gunicorn
-pandas
-matplotlib
-numpy
-scipy
-scikit-learn
-tensorflow
