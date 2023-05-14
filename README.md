@@ -5,6 +5,8 @@
 ![Release](https://img.shields.io/github/v/release/Circle-1/Stock-X)
 [![Heroku](https://img.shields.io/badge/Heroku-Active-blue?logo=heroku)](https://stock-x-proj.herokuapp.com/)
 
+## ⚠️ **MODEL is now available at Hugging Face: https://huggingface.co/kryox64/stock-x** with DOI ⚠️
+
 This project is all about analysis of Stock Market and providing suggestions to stockholders to invest in right company
 
 Note: The notebook used here (IPYNB) is made using Kaggle, a data-science and ML community website which provides free Jupyter Notebook environment to work on programs and GPUs and TPUs to work on Neural Networks easily.
